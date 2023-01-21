@@ -1,19 +1,26 @@
 package com.pdmpa.stockmarketapp.presentation.listingscompany
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.pdmpa.stockmarketapp.R
+import com.pdmpa.stockmarketapp.ui.theme.Typography
 import com.pdmpa.stockmarketapp.ui.theme.md_theme_light_onPrimaryContainer
 import com.pdmpa.stockmarketapp.ui.theme.md_theme_light_primary
 
@@ -32,6 +39,22 @@ fun CompanyListingsScreen(
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
+
+
+        ProfileCard(
+            modifier = Modifier
+                .padding(vertical = 16.dp)
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp),
+            viewModel = viewModel
+        )
+
+        Spacer(
+            modifier = Modifier.padding(
+                horizontal = 16.dp
+            )
+        )
+
         OutlinedTextField(
             value = state.searchQuery,
             onValueChange = {
@@ -59,6 +82,7 @@ fun CompanyListingsScreen(
                 viewModel.onEvent(CompanyListingsEvent.Refresh)
             }
         ) {
+
             LazyColumn(
                 modifier = Modifier.fillMaxSize()
             ) {
@@ -87,6 +111,41 @@ fun CompanyListingsScreen(
                         )
                     }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ProfileCard(
+    modifier: Modifier = Modifier,
+    viewModel: CompanyListingsViewModel
+) {
+    Card(
+        modifier = modifier,
+        colors = CardDefaults.cardColors(Color.Transparent),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Row(
+            modifier = Modifier.padding(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Image(
+                modifier = Modifier
+                    .size(48.dp)
+                    .clip(CircleShape),
+                painter = painterResource(R.drawable.img_6),
+                contentDescription = null,
+                contentScale = ContentScale.Crop
+            )
+
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(text = viewModel.myGreetingMessage())
+
+                Text(text = "Kocsis Bogdan", style = Typography.body1)
             }
         }
     }
