@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pdmpa.stockmarketapp.domain.repository.AuthenticationRepository
 import com.pdmpa.stockmarketapp.domain.repository.StockRepository
 import com.pdmpa.stockmarketapp.navigation.CompanyInfo
 import com.pdmpa.stockmarketapp.util.Resource
@@ -17,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CompanyListingsViewModel @Inject constructor(
-    private val repository: StockRepository
+    private val repository: StockRepository,
+    private val authRepository: AuthenticationRepository,
 ) : ViewModel() {
 
     var state by mutableStateOf(CompanyListingsState())
@@ -85,4 +87,5 @@ class CompanyListingsViewModel @Inject constructor(
         }
     }
 
+    fun getUserName(): String? = authRepository.getUserName()
 }

@@ -3,7 +3,6 @@ package com.pdmpa.stockmarketapp.presentation.profile
 import com.pdmpa.stockmarketapp.R
 
 data class Profile(
-    val isAdmin: Boolean = false,
     val firstName: String = "Kocsis",
     val lastName: String = "Bogdan",
     val email: String = "bogdankocsis@gmail.com",

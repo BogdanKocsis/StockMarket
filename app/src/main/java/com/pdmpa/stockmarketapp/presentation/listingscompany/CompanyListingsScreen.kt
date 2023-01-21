@@ -145,7 +145,7 @@ private fun ProfileCard(
             ) {
                 Text(text = viewModel.myGreetingMessage())
 
-                Text(text = "Kocsis Bogdan", style = Typography.body1)
+                viewModel.getUserName()?.let { Text(text = it, style = Typography.body1) }
             }
         }
     }

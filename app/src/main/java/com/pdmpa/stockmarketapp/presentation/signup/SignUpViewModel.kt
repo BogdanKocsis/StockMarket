@@ -20,7 +20,7 @@ class SignUpViewModel @Inject constructor(
             }
             is SignUpEvent.SignUpClickAction -> {
                 viewModelScope.launch {
-                    repository.signUpWithEmail(event.email, event.password).collect {
+                    repository.signUpWithEmail(event.email, event.password, event.name).collect {
                         when (it) {
                             is AuthStatus.Failure -> Unit
                             AuthStatus.Success -> {
