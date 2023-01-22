@@ -50,11 +50,13 @@ fun ProfileScreen(
             modifier = Modifier.padding(PaddingValues(top = 20.dp))
 
         ) {
-            ProfileHeader(
-                "${profile.firstName} ${profile.lastName}",
-                profile.avatarUrl,
-                progress,
-            )
+            viewModel.getUserName()?.let {
+                ProfileHeader(
+                    it,
+                    profile.avatarUrl,
+                    progress,
+                )
+            }
         }
 
         Column(

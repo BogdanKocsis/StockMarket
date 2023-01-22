@@ -9,16 +9,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val repository: AuthenticationRepository) :
+class ProfileViewModel @Inject constructor(private val authRepository: AuthenticationRepository) :
     ViewModel() {
     fun onEvent(event: ProfileEvent) {
         when (event) {
             is ProfileEvent.SignOutClickAction -> {
                 viewModelScope.launch {
-                    repository.logOut()
+                    authRepository.logOut()
                     event.navController.navigate(Login.route)
                 }
             }
         }
     }
+    fun getUserName(): String? = authRepository.getUserName()
 }
