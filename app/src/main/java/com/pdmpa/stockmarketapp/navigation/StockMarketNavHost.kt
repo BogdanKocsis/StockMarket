@@ -23,7 +23,7 @@ fun StockMarketNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Splash.route,
+        startDestination = Home.route,
         modifier = modifier
     ) {
         composable(route = Splash.route) {

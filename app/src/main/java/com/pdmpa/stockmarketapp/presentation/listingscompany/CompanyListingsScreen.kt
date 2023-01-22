@@ -1,6 +1,7 @@
 package com.pdmpa.stockmarketapp.presentation.listingscompany
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -116,6 +117,7 @@ fun CompanyListingsScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ProfileCard(
     modifier: Modifier = Modifier,
@@ -146,6 +148,25 @@ private fun ProfileCard(
                 Text(text = viewModel.myGreetingMessage())
 
                 viewModel.getUserName()?.let { Text(text = it, style = Typography.body1) }
+            }
+            Spacer(Modifier.weight(1f))
+            BadgedBox(
+                badge = { Badge(modifier = Modifier.size(12.dp)) {} },
+            ) {
+                val radius = 16.dp
+                val shape = RoundedCornerShape(radius)
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .defaultMinSize(minWidth = radius * 2, minHeight = radius * 2)
+                        .background(
+                            color = Color.LightGray,
+                            shape = shape
+                        )
+                        .clip(shape),
+                ) {
+                    Icon(painterResource(id = R.drawable.img_14), contentDescription = "")
+                }
             }
         }
     }
