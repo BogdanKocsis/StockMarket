@@ -8,6 +8,8 @@ import com.pdmpa.stockmarketapp.navigation.Home
 import com.pdmpa.stockmarketapp.navigation.ResetPassword
 import com.pdmpa.stockmarketapp.navigation.SignUp
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,6 +18,9 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val repository: AuthenticationRepository,
 ) : ViewModel() {
+    private val _toastMessage = MutableSharedFlow<String>()
+    val toastMessage = _toastMessage.asSharedFlow()
+
     fun onEvent(event: LogInEvent) {
         when (event) {
             is LogInEvent.LogInClickAction -> {
@@ -23,8 +28,11 @@ class LoginViewModel @Inject constructor(
                     repository.logInWithEmail(event.email, event.password)
                         .collect {
                             when (it) {
-                                is AuthStatus.Failure -> Unit
+                                is AuthStatus.Failure -> {
+                                    _toastMessage.emit("Email or password incorrect")
+                                }
                                 AuthStatus.Success -> {
+                                    _toastMessage.emit("Login successfully")
                                     event.navController.navigate(Home.route)
                                 }
                             }
