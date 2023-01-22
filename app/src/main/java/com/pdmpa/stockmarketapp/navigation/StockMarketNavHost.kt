@@ -10,6 +10,7 @@ import androidx.navigation.navArgument
 import com.pdmpa.stockmarketapp.presentation.infocompany.CompanyInfoScreen
 import com.pdmpa.stockmarketapp.presentation.listingscompany.CompanyListingsScreen
 import com.pdmpa.stockmarketapp.presentation.login.LoginScreen
+import com.pdmpa.stockmarketapp.presentation.onBoarding.OnBoardingScreen
 import com.pdmpa.stockmarketapp.presentation.profile.ProfileScreen
 import com.pdmpa.stockmarketapp.presentation.signup.SignUpScreen
 import com.pdmpa.stockmarketapp.presentation.splash_screen.SplashScreen
@@ -26,6 +27,9 @@ fun StockMarketNavHost(
     ) {
         composable(route = Splash.route) {
             SplashScreen(navController = navController)
+        }
+        composable(route = OnBoarding.route) {
+            OnBoardingScreen(navController = navController)
         }
         composable(route = Login.route) {
             LoginScreen(navController = navController)

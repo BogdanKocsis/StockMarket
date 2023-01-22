@@ -8,6 +8,10 @@ object Splash : Destinations {
     override val route = "splash_screen"
 }
 
+object OnBoarding : Destinations {
+    override val route = "on_boarding_screen"
+}
+
 object Login : Destinations {
     override val route = "login_screen"
 }
