@@ -57,7 +57,8 @@ fun ResetPasswordScreen(
     ) {
         Box(modifier = Modifier.align(Alignment.BottomCenter)) {
             Image(
-                painter = painterResource(id = R.drawable.img),
+                painter = painterResource(id = R.drawable.img_13
+                ),
                 contentDescription = null,
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
@@ -83,7 +84,7 @@ fun ResetPasswordScreen(
                     style = Typography.h5
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(50.dp))
                 StyledTextField(
                     text = emailText,
                     placeholder = stringResource(R.string.enter_email),
