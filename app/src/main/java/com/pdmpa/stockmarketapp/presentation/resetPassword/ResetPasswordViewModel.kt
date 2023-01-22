@@ -1,11 +1,10 @@
-package com.pdmpa.stockmarketapp.presentation.login
+package com.pdmpa.stockmarketapp.presentation.resetPassword
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pdmpa.stockmarketapp.domain.repository.AuthStatus
 import com.pdmpa.stockmarketapp.domain.repository.AuthenticationRepository
-import com.pdmpa.stockmarketapp.navigation.Home
-import com.pdmpa.stockmarketapp.navigation.ResetPassword
+import com.pdmpa.stockmarketapp.navigation.Login
 import com.pdmpa.stockmarketapp.navigation.SignUp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -13,30 +12,28 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(
+class ResetPasswordViewModel @Inject constructor(
     private val repository: AuthenticationRepository,
 ) : ViewModel() {
-    fun onEvent(event: LogInEvent) {
+    fun onEvent(event: ResetPasswordEvent) {
         when (event) {
-            is LogInEvent.LogInClickAction -> {
+            is ResetPasswordEvent.RegisterClickAction -> {
+                event.navController.navigate(SignUp.route)
+            }
+            is ResetPasswordEvent.ResetClickAction -> {
                 viewModelScope.launch {
-                    repository.logInWithEmail(event.email, event.password)
+                    repository.resetPasswordWithEmail(event.email)
                         .collect {
                             when (it) {
                                 is AuthStatus.Failure -> Unit
                                 AuthStatus.Success -> {
-                                    event.navController.navigate(Home.route)
+                                    event.navController.navigate(Login.route)
                                 }
                             }
                         }
                 }
             }
-            is LogInEvent.RegisterClickAction -> {
-                event.navController.navigate(SignUp.route)
-            }
-            is LogInEvent.ResetClickAction ->
-                event.navController.navigate(ResetPassword.route)
-
         }
+
     }
 }

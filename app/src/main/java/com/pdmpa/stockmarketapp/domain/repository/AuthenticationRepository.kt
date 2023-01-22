@@ -57,6 +57,20 @@ class AuthenticationRepository @Inject constructor(
         }
     }
 
+    fun resetPasswordWithEmail(email: String): Flow<AuthStatus> {
+        return callbackFlow {
+            auth.signOut()
+            auth.sendPasswordResetEmail(email)
+                .addOnSuccessListener {
+                    trySend(AuthStatus.Success)
+                }
+                .addOnFailureListener {
+                    trySend(AuthStatus.Failure(it.message.toString()))
+                }
+            awaitClose()
+        }
+    }
+
     fun logOut(): Boolean {
         return try {
             auth.signOut()

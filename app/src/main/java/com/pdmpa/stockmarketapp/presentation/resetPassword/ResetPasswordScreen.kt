@@ -1,4 +1,4 @@
-package com.pdmpa.stockmarketapp.presentation.login
+package com.pdmpa.stockmarketapp.presentation.resetPassword
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -30,33 +30,24 @@ import com.pdmpa.stockmarketapp.util.AuthUtil
 import com.pdmpa.stockmarketapp.util.PrimaryButton
 import com.pdmpa.stockmarketapp.util.StyledTextField
 
-
 @Composable
-fun LoginScreen(
+fun ResetPasswordScreen(
     navController: NavController,
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: ResetPasswordViewModel = hiltViewModel()
 ) {
 
-
     var emailText by rememberSaveable { mutableStateOf("") }
-    var passwordText by rememberSaveable { mutableStateOf("") }
-    var isPasswordsVisible by rememberSaveable { mutableStateOf(false) }
-
     var validateEmailText by rememberSaveable { mutableStateOf(true) }
-    var validatePasswordText by rememberSaveable { mutableStateOf(true) }
 
     fun validateData(
         email: String,
-        password: String,
     ): Boolean {
-        val passwordRegex = AuthUtil.isPasswordValid(password)
         val emailRegex = AuthUtil.isEmailValid(email)
-
         validateEmailText = emailRegex
-        validatePasswordText = passwordRegex
 
-        return validateEmailText && validatePasswordText
+        return validateEmailText
     }
+
 
     Box(
         modifier = Modifier
@@ -64,8 +55,6 @@ fun LoginScreen(
             .fillMaxHeight()
             .background(color = Color.Transparent)
     ) {
-
-
         Box(modifier = Modifier.align(Alignment.BottomCenter)) {
             Image(
                 painter = painterResource(id = R.drawable.img),
@@ -86,7 +75,7 @@ fun LoginScreen(
             ) {
                 Spacer(modifier = Modifier.height(50.dp))
                 Text(
-                    text = stringResource(R.string.login),
+                    text = stringResource(R.string.reset_password),
                     textAlign = TextAlign.Left,
                     modifier = Modifier
                         .padding(top = 130.dp, start = 40.dp)
@@ -103,46 +92,17 @@ fun LoginScreen(
                     showError = !validateEmailText,
                     errorMessage = stringResource(R.string.validate_email_error)
                 )
-
                 Spacer(modifier = Modifier.padding(3.dp))
-                StyledTextField(
-                    text = passwordText,
-                    placeholder = stringResource(R.string.enter_password),
-                    isPasswordTextField = true,
-                    isPasswordVisible = isPasswordsVisible,
-                    onVisibilityChange = { isPasswordsVisible = it },
-                    onValueChange = { passwordText = it },
-                    showError = !validatePasswordText,
-                    errorMessage = stringResource(R.string.validate_password_error)
-                )
-
-                TextButton(
-                    onClick = { viewModel.onEvent(LogInEvent.ResetClickAction(navController)) },
-                    modifier = Modifier
-                        .align(
-                            alignment = Alignment.End
-                        )
-                        .padding(horizontal = 16.dp)
-
-                ) {
-                    Text(
-                        text = stringResource(R.string.forgot_password),
-                        letterSpacing = 1.sp,
-                        style = Typography.button,
-                        color = md_theme_light_primary
-                    )
-                }
                 PrimaryButton(
-                    text = stringResource(id = R.string.login),
+                    text = stringResource(id = R.string.submit),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(start = 32.dp, end = 32.dp),
                     onClick = {
-                        if (validateData(emailText, passwordText)) {
+                        if (validateData(emailText)) {
                             viewModel.onEvent(
-                                LogInEvent.LogInClickAction(
+                                ResetPasswordEvent.ResetClickAction(
                                     emailText,
-                                    passwordText,
                                     navController
                                 )
                             )
@@ -158,7 +118,13 @@ fun LoginScreen(
                         fontSize = 12.sp
                     )
                     TextButton(
-                        onClick = { viewModel.onEvent(LogInEvent.RegisterClickAction(navController)) },
+                        onClick = {
+                            viewModel.onEvent(
+                                ResetPasswordEvent.RegisterClickAction(
+                                    navController
+                                )
+                            )
+                        },
                     ) {
                         Text(
                             text = stringResource(R.string.register),
@@ -168,7 +134,11 @@ fun LoginScreen(
                         )
                     }
                 }
+
             }
+
         }
+
+
     }
 }

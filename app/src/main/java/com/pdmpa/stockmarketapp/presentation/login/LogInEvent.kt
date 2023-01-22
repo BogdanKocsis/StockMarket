@@ -15,4 +15,8 @@ sealed class LogInEvent {
         val navController: NavController
     ) : LogInEvent()
 
+    data class ResetClickAction(
+        val navController: NavController
+    ) : LogInEvent()
+
 }

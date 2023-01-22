@@ -4,7 +4,7 @@
     <string name="new_to_app">New to Stock Market App?</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="validate_password_error">Must mix capital and non-capital letters, a number, special character and a minimum length of 8</string>
-    <string name="validate_email_error">The formal of the mail does not seem right</string>
+    <string name="validate_email_error">The format of the mail does not seem right</string>
     <string name="enter_email">Email address</string>
     <string name="enter_password">Enter password</string>
     <string name="login">Login</string>
@@ -23,4 +23,6 @@
     <string name="bottomsheet_title">More about me</string>
     <string name="bottomsheet_subtitle">Swipe up to see more information about you or to sign out</string>
     <string name="sign_out">Sign out</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="submit">Submit</string>
 </resources>

@@ -20,6 +20,10 @@ object SignUp : Destinations {
     override val route = "signup_screen"
 }
 
+object ResetPassword: Destinations{
+    override val route = "reset_password_screen"
+}
+
 object Home : Destinations {
     override val route = "home_screen"
 }
@@ -31,3 +35,5 @@ object CompanyInfo : Destinations {
 object Profile : Destinations {
     override val route = "profile_screen"
 }
+
+

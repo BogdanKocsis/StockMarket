@@ -12,6 +12,7 @@ import com.pdmpa.stockmarketapp.presentation.listingscompany.CompanyListingsScre
 import com.pdmpa.stockmarketapp.presentation.login.LoginScreen
 import com.pdmpa.stockmarketapp.presentation.onBoarding.OnBoardingScreen
 import com.pdmpa.stockmarketapp.presentation.profile.ProfileScreen
+import com.pdmpa.stockmarketapp.presentation.resetPassword.ResetPasswordScreen
 import com.pdmpa.stockmarketapp.presentation.signup.SignUpScreen
 import com.pdmpa.stockmarketapp.presentation.splash_screen.SplashScreen
 
@@ -36,6 +37,9 @@ fun StockMarketNavHost(
         }
         composable(route = SignUp.route) {
             SignUpScreen(navController = navController)
+        }
+        composable(route = ResetPassword.route) {
+            ResetPasswordScreen(navController = navController)
         }
         composable(route = Home.route) {
             CompanyListingsScreen(navController = navController)
