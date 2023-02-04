@@ -10,6 +10,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -94,7 +95,8 @@ fun AddNewCardScreenTopAppBar(
 @Composable
 fun CompanyInfoTopAppBar(
     navController: NavController,
-    title: String?
+    title: String?,
+    onCLick: () -> Unit
 ) {
     Row(
         modifier = Modifier.height(56.dp),
@@ -123,6 +125,14 @@ fun CompanyInfoTopAppBar(
             )
         }
         Spacer(modifier = Modifier.weight(0.12f))
+        IconButton(onClick = onCLick, modifier = Modifier.weight(0.12f)) {
+            CompositionLocalProvider(LocalContentAlpha provides 0.4f) {
+                Icon(
+                    imageVector = Icons.Default.Share,
+                    contentDescription = "Share"
+                )
+            }
+        }
     }
 }
 

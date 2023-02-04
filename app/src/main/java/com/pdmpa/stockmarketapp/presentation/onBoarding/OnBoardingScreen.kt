@@ -1,6 +1,5 @@
 package com.pdmpa.stockmarketapp.presentation.onBoarding
 
-import android.util.Log
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
@@ -63,10 +62,6 @@ fun OnBoardingScreen(navController: NavHostController) {
             } else {
                 scope.launch {
                     dataStoreRepository.saveOnBoardingState(true)
-                    dataStoreRepository.readOnBoardingState().collect {
-                        Log.d("Onbo", "SplashScreen: $it")
-                    }
-
                 }
                 navController.navigate(Login.route)
             }

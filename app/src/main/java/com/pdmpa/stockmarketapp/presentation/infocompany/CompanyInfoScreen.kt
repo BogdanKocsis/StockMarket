@@ -1,5 +1,6 @@
 package com.pdmpa.stockmarketapp.presentation.infocompany
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.CircularProgressIndicator
@@ -9,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -34,9 +36,18 @@ fun CompanyInfoScreen(
                 .background(md_theme_light_background)
                 .padding(16.dp)
         ) {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "What about this stock, ${state.company?.name}? \n${state.company?.description}?")
+                type = "text/plain"
+            }
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            val context = LocalContext.current
+
             CompanyInfoTopAppBar(
                 navController = navController,
-                title = state.company?.name
+                title = state.company?.name,
+                onCLick = { context.startActivity(shareIntent) }
             )
             state.company?.let { company ->
                 Text(
