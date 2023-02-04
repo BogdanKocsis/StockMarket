@@ -10,7 +10,7 @@ import com.pdmpa.stockmarketapp.domain.model.CompanyInfo
 import com.pdmpa.stockmarketapp.domain.model.CompanyListing
 import com.pdmpa.stockmarketapp.domain.model.IntradayInfo
 import com.pdmpa.stockmarketapp.domain.repository.StockRepository
-import com.pdmpa.stockmarketapp.util.Resource
+import com.pdmpa.stockmarketapp.util.Resources
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -31,11 +31,11 @@ class StockRepositoryImpl @Inject constructor(
     override suspend fun getCompanyListings(
         fetchFromRemote: Boolean,
         query: String
-    ): Flow<Resource<List<CompanyListing>>> {
+    ): Flow<Resources<List<CompanyListing>>> {
         return flow {
-            emit(Resource.Loading(true))
+            emit(Resources.Loading(true))
             val localListings = dao.searchCompanyListing(query)
-            emit(Resource.Success(
+            emit(Resources.Success(
                 data = localListings.map { it.toCompanyListing() }
             ))
 
@@ -43,7 +43,7 @@ class StockRepositoryImpl @Inject constructor(
             val shouldJustLoadFromCache = !isDbEmpty && !fetchFromRemote
 
             if (shouldJustLoadFromCache) {
-                emit(Resource.Loading(false))
+                emit(Resources.Loading(false))
                 return@flow
             }
 
@@ -53,11 +53,11 @@ class StockRepositoryImpl @Inject constructor(
 
             } catch (e: IOException) {
                 e.printStackTrace()
-                emit(Resource.Error("Couldn't load data"))
+                emit(Resources.Error("Couldn't load data"))
                 null
             } catch (e: HttpException) {
                 e.printStackTrace()
-                emit(Resource.Error("Couldn't load data"))
+                emit(Resources.Error("Couldn't load data"))
                 null
             }
 
@@ -66,44 +66,44 @@ class StockRepositoryImpl @Inject constructor(
                 dao.insertCompanyListings(
                     listings.map { it.toCompanyListingEntity() }
                 )
-                emit(Resource.Success(
+                emit(Resources.Success(
                     data = dao.searchCompanyListing("").map { it.toCompanyListing() }
                 ))
-                emit(Resource.Loading(false))
+                emit(Resources.Loading(false))
             }
         }
     }
 
-    override suspend fun getIntradayInfo(symbol: String): Resource<List<IntradayInfo>> {
+    override suspend fun getIntradayInfo(symbol: String): Resources<List<IntradayInfo>> {
         return try {
             val response = api.getIntradayInfo(symbol)
             val results = intradayInfoParser.parse(response.byteStream())
-            Resource.Success(results)
+            Resources.Success(results)
         } catch (e: IOException) {
             e.printStackTrace()
-            Resource.Error(
+            Resources.Error(
                 message = "Couldn't load intraday info"
             )
         } catch (e: HttpException) {
             e.printStackTrace()
-            Resource.Error(
+            Resources.Error(
                 message = "Couldn't load intraday info"
             )
         }
     }
 
-    override suspend fun getCompanyInfo(symbol: String): Resource<CompanyInfo> {
+    override suspend fun getCompanyInfo(symbol: String): Resources<CompanyInfo> {
         return try {
             val result = api.getCompanyInfo(symbol)
-            Resource.Success(result.toCompanyInfo())
+            Resources.Success(result.toCompanyInfo())
         } catch (e: IOException) {
             e.printStackTrace()
-            Resource.Error(
+            Resources.Error(
                 message = "Couldn't load company info"
             )
         } catch (e: HttpException) {
             e.printStackTrace()
-            Resource.Error(
+            Resources.Error(
                 message = "Couldn't load company info"
             )
         }

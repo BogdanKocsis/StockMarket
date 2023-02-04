@@ -10,3 +10,7 @@ object Profile : Destinations {
     override val route: String = "profile_screen"
 
 }
+
+object News : Destinations {
+    override val route: String = "news"
+}

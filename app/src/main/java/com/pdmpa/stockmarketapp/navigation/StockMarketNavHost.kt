@@ -1,5 +1,6 @@
 package com.pdmpa.stockmarketapp.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -10,12 +11,14 @@ import androidx.navigation.navArgument
 import com.pdmpa.stockmarketapp.presentation.infocompany.CompanyInfoScreen
 import com.pdmpa.stockmarketapp.presentation.listingscompany.CompanyListingsScreen
 import com.pdmpa.stockmarketapp.presentation.login.LoginScreen
+import com.pdmpa.stockmarketapp.presentation.news.NewsScreen
 import com.pdmpa.stockmarketapp.presentation.onBoarding.OnBoardingScreen
 import com.pdmpa.stockmarketapp.presentation.profile.ProfileScreen
 import com.pdmpa.stockmarketapp.presentation.resetPassword.ResetPasswordScreen
 import com.pdmpa.stockmarketapp.presentation.signup.SignUpScreen
 import com.pdmpa.stockmarketapp.presentation.splash_screen.SplashScreen
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun StockMarketNavHost(
     navController: NavHostController,
@@ -52,6 +55,9 @@ fun StockMarketNavHost(
         }
         composable(route = Profile.route) {
             ProfileScreen(navController = navController)
+        }
+        composable(route = News.route) {
+            NewsScreen()
         }
     }
 }

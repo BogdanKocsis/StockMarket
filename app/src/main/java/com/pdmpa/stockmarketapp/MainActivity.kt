@@ -45,6 +45,9 @@ fun StockMarketApp() {
             "profile_screen" -> {
                 bottomBarState.value = true
             }
+            "news" -> {
+                bottomBarState.value = true
+            }
             "login_screen" -> {
                 bottomBarState.value = false
             }

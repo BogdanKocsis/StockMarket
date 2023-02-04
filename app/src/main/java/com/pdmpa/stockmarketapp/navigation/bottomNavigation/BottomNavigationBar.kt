@@ -20,6 +20,7 @@ fun BottomNavigationBar(
     val items = listOf(
         BottomNavItem.HomeBottomNavItem,
         BottomNavItem.ProfileBottomNavItem,
+        BottomNavItem.NewsBottomNavItem
     )
     AnimatedVisibility(
         visible = bottomBarState.value,

@@ -36,4 +36,9 @@ object Profile : Destinations {
     override val route = "profile_screen"
 }
 
+object News: Destinations{
+    override val route = "news"
+
+}
+
 

@@ -7,7 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pdmpa.stockmarketapp.domain.repository.StockRepository
-import com.pdmpa.stockmarketapp.util.Resource
+import com.pdmpa.stockmarketapp.util.Resources
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -30,14 +30,14 @@ class CompanyInfoViewModel @Inject constructor(
             val intradayInfoResult = async { repository.getIntradayInfo(symbol) }
 
             when (val result = companyInfoResult.await()) {
-                is Resource.Success -> {
+                is Resources.Success -> {
                     state = state.copy(
                         company = result.data,
                         isLoading = false,
                         error = null
                     )
                 }
-                is Resource.Error -> {
+                is Resources.Error -> {
                     state = state.copy(
                         company = null,
                         isLoading = false,
@@ -48,14 +48,14 @@ class CompanyInfoViewModel @Inject constructor(
             }
 
             when (val result = intradayInfoResult.await()) {
-                is Resource.Success -> {
+                is Resources.Success -> {
                     state = state.copy(
                         stockInfos = result.data.orEmpty(),
                         isLoading = false,
                         error = null
                     )
                 }
-                is Resource.Error -> {
+                is Resources.Error -> {
                     state = state.copy(
                         company = null,
                         isLoading = false,

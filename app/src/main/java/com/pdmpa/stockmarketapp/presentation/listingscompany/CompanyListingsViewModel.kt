@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.pdmpa.stockmarketapp.domain.repository.AuthenticationRepository
 import com.pdmpa.stockmarketapp.domain.repository.StockRepository
 import com.pdmpa.stockmarketapp.navigation.CompanyInfo
-import com.pdmpa.stockmarketapp.util.Resource
+import com.pdmpa.stockmarketapp.util.Resources
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -58,17 +58,17 @@ class CompanyListingsViewModel @Inject constructor(
                 .getCompanyListings(fetchFromRemote, query)
                 .collect { result ->
                     when (result) {
-                        is Resource.Success -> {
+                        is Resources.Success -> {
                             result.data?.let { listings ->
                                 state = state.copy(
                                     companies = listings
                                 )
                             }
                         }
-                        is Resource.Loading -> {
+                        is Resources.Loading -> {
                             state = state.copy(isLoading = result.isLoading)
                         }
-                        is Resource.Error -> Unit
+                        is Resources.Error -> Unit
                     }
                 }
         }
