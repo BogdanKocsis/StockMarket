@@ -15,12 +15,14 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.pdmpa.stockmarketapp.domain.model.Card
 import com.pdmpa.stockmarketapp.domain.model.CardInput
 import com.pdmpa.stockmarketapp.presentation.AddNewCardScreenTopAppBar
 import com.pdmpa.stockmarketapp.presentation.AddOrCancelCardButtonGroup
 import com.pdmpa.stockmarketapp.presentation.CardInputCollector
 import com.pdmpa.stockmarketapp.presentation.home.card_completed.AddNewCardMockBack
 import com.pdmpa.stockmarketapp.presentation.home.card_completed.AddNewCardMockFront
+import com.pdmpa.stockmarketapp.util.cardList
 
 
 @SuppressLint("UnrememberedMutableState")
@@ -172,6 +174,13 @@ fun AddNewCardScreen(
                     AddOrCancelCardButtonGroup(
                         modifier = Modifier.padding(16.dp),
                         navController = navController,
+                    )
+                    cardList = cardList + Card(
+                        CardInput.CardNumber.text.value,
+                        CardInput.CardHolderName.text.value,
+                        "0.00",
+                        CardInput.ValidUntil.text.value,
+                        CardInput.CVV.text.value
                     )
                 }
             }

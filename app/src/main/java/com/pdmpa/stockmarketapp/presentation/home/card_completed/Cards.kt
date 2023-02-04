@@ -28,6 +28,7 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.core.content.ContextCompat
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import com.pdmpa.stockmarketapp.R
+import com.pdmpa.stockmarketapp.domain.model.Card
 import com.pdmpa.stockmarketapp.presentation.CardTextField
 import com.pdmpa.stockmarketapp.ui.theme.md_theme_light_primary
 import java.util.*
@@ -394,7 +395,7 @@ fun AddNewCardMockFront(
 
 
 @Composable
-fun MasterCardMock(modifier: Modifier = Modifier) {
+fun MasterCardMock(modifier: Modifier = Modifier, card: Card) {
     val context = LocalContext.current
     Card(
         elevation = 4.dp,
@@ -518,7 +519,7 @@ fun MasterCardMock(modifier: Modifier = Modifier) {
                 )
             }
             Text(
-                text = "$52,740.00",
+                text = card.balance,
                 modifier = Modifier.constrainAs(amount) {
                     top.linkTo(balance.bottom)
                     start.linkTo(balance.start)
@@ -527,7 +528,7 @@ fun MasterCardMock(modifier: Modifier = Modifier) {
             )
 
             Text(
-                text = "****  8405",
+                text = "****  " + card.number.takeLast(4),
                 modifier = Modifier.constrainAs(cardNumber) {
                     start.linkTo(parent.start)
                     bottom.linkTo(parent.bottom)
@@ -537,7 +538,7 @@ fun MasterCardMock(modifier: Modifier = Modifier) {
             )
 
             Text(
-                text = "11/23",
+                text = card.validUntil.take(2) + "/" + card.validUntil.takeLast(2),
                 modifier = Modifier.constrainAs(date) {
                     end.linkTo(parent.end)
                     bottom.linkTo(parent.bottom)

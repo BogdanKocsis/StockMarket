@@ -59,3 +59,11 @@ sealed class CardInput(
         }
     }
 }
+
+data class Card(
+    val number: String,
+    val holderName: String,
+    val balance: String,
+    val validUntil: String,
+    val cvv: String
+)

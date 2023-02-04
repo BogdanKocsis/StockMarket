@@ -1,4 +1,4 @@
-package com.pdmpa.stockmarketapp.presentation.home
+package com.pdmpa.stockmarketapp.presentation.home.card_completed
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -20,9 +20,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.pdmpa.stockmarketapp.R
-import com.pdmpa.stockmarketapp.presentation.home.card_completed.MasterCardMock
 import com.pdmpa.stockmarketapp.ui.theme.Typography
 import com.pdmpa.stockmarketapp.ui.theme.md_theme_dark_onPrimaryContainer
+import com.pdmpa.stockmarketapp.util.cardList
 import kotlinx.coroutines.delay
 import java.text.DecimalFormat
 
@@ -55,7 +55,6 @@ fun AvailableBalanceCardList() {
     }
 }
 
-
 @ExperimentalAnimationApi
 @Composable
 private fun CardList() {
@@ -82,13 +81,27 @@ private fun CardList() {
                 remember { (localConfiguration.screenHeightDp * 0.25f) }
             val cardsWidth = remember { (localConfiguration.screenWidthDp * 0.80f) }
             LazyRow {
-                items(1) {
-
-                    MasterCardMock(
-                        modifier = Modifier
-                            .height(cardsHeight.dp)
-                            .width(cardsWidth.dp)
-                    )
+                items(cardList.size) {
+                    when (it) {
+                        0 -> MasterCardMock(
+                            modifier = Modifier
+                                .height(cardsHeight.dp)
+                                .width(cardsWidth.dp),
+                            cardList[it]
+                        )
+                        2 ->
+                            MasterCardMock(
+                                modifier = Modifier
+                                    .height(cardsHeight.dp)
+                                    .width(cardsWidth.dp),
+                                cardList[it]
+                            )
+                        else -> {
+                            if (it % 2 == 1){
+                                Spacer(modifier = Modifier.width(12.dp))
+                            }
+                        }
+                    }
 
 
                 }
@@ -97,6 +110,7 @@ private fun CardList() {
         Spacer(modifier = Modifier.height(8.dp))
     }
 }
+
 
 @Composable
 fun AvailableBalanceText() {

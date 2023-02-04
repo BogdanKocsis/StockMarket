@@ -32,6 +32,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.pdmpa.stockmarketapp.R
 import com.pdmpa.stockmarketapp.navigation.AddNewCard
+import com.pdmpa.stockmarketapp.presentation.home.card_completed.AvailableBalanceCardList
 import com.pdmpa.stockmarketapp.ui.theme.Typography
 
 @ExperimentalAnimationApi
