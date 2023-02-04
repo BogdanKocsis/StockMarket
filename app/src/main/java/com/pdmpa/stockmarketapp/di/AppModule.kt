@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.pdmpa.stockmarketapp.data.local.StockDatabase
+import com.pdmpa.stockmarketapp.data.remote.NewsApi
 import com.pdmpa.stockmarketapp.data.remote.StockApi
 import com.pdmpa.stockmarketapp.data.repository.NewsRepositoryImpl
 import com.pdmpa.stockmarketapp.domain.GetNewsUseCase
@@ -29,6 +30,15 @@ object AppModule {
     fun provideStockApi(): StockApi {
         return Retrofit.Builder()
             .baseUrl(StockApi.BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+            .create()
+    }
+
+    @Provides
+    @Singleton
+    fun provideStockNewsApi(): NewsApi {
+        return Retrofit.Builder()
             .baseUrl(StockApi.NEWS_BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
@@ -52,7 +62,7 @@ object AppModule {
     @Provides
     @Singleton
     fun providesNewsRepository(
-        api: StockApi
+        api: NewsApi
     ): NewsRepository{
         return NewsRepositoryImpl(api)
     }

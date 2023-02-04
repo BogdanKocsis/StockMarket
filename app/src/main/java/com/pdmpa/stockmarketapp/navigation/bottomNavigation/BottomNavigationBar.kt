@@ -19,8 +19,9 @@ fun BottomNavigationBar(
 ) {
     val items = listOf(
         BottomNavItem.HomeBottomNavItem,
-        BottomNavItem.ProfileBottomNavItem,
-        BottomNavItem.NewsBottomNavItem
+        BottomNavItem.StocksListBottomNavItem,
+        BottomNavItem.NewsBottomNavItem,
+        BottomNavItem.ProfileBottomNavItem
     )
     AnimatedVisibility(
         visible = bottomBarState.value,

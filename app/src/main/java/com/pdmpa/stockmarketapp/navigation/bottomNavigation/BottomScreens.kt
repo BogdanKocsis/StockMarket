@@ -11,6 +11,11 @@ object Profile : Destinations {
 
 }
 
+object StocksList : Destinations {
+    override val route: String = "stocks_list_screen"
+
+}
+
 object News : Destinations {
-    override val route: String = "news"
+    override val route: String = "news_screen"
 }

@@ -10,11 +10,12 @@ import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.pdmpa.stockmarketapp.presentation.CompanyInfoTopAppBar
 import com.pdmpa.stockmarketapp.ui.theme.md_theme_light_background
 import com.pdmpa.stockmarketapp.ui.theme.md_theme_light_onErrorContainer
 import com.ramcosta.composedestinations.annotation.Destination
@@ -22,7 +23,8 @@ import com.ramcosta.composedestinations.annotation.Destination
 @Composable
 @Destination
 fun CompanyInfoScreen(
-    viewModel: CompanyInfoViewModel = hiltViewModel()
+    viewModel: CompanyInfoViewModel = hiltViewModel(),
+    navController: NavController
 ) {
     val state = viewModel.state
     if (state.error == null) {
@@ -32,15 +34,11 @@ fun CompanyInfoScreen(
                 .background(md_theme_light_background)
                 .padding(16.dp)
         ) {
+            CompanyInfoTopAppBar(
+                navController = navController,
+                title = state.company?.name
+            )
             state.company?.let { company ->
-                Text(
-                    text = company.name,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 18.sp,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.fillMaxWidth()
-                )
-                Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = company.symbol,
                     fontStyle = FontStyle.Italic,

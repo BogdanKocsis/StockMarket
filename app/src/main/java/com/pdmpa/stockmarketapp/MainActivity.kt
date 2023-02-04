@@ -45,7 +45,10 @@ fun StockMarketApp() {
             "profile_screen" -> {
                 bottomBarState.value = true
             }
-            "news" -> {
+            "news_screen" -> {
+                bottomBarState.value = true
+            }
+            "stocks_list_screen" -> {
                 bottomBarState.value = true
             }
             "login_screen" -> {
@@ -57,6 +60,13 @@ fun StockMarketApp() {
             "splash_screen" -> {
                 bottomBarState.value = false
             }
+            "add_new_card_screen" -> {
+                bottomBarState.value = false
+            }
+            "card_created_screen" -> {
+                bottomBarState.value = false
+            }
+
         }
         Scaffold(
             modifier = Modifier.fillMaxSize(),

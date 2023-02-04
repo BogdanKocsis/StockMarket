@@ -25,4 +25,18 @@
     <string name="sign_out">Sign out</string>
     <string name="reset_password">Reset Password</string>
     <string name="submit">Submit</string>
+    <string name="congratulations">Congratulations!</string>
+    <string name="back_to_wallet">Back to wallet</string>
+    <string name="card_number">CARD NUMBER</string>
+    <string name="cardholder_name">CARDHOLDER NAME</string>
+    <string name="valid_until">VALID UNTIL</string>
+    <string name="cvv_number">CVV</string>
+    <string name="add_card">Add card</string>
+    <string name="cancel">Cancel</string>
+    <string name="navigate_to_homepage">Navigate to homepage</string>
+    <string name="chip">Emv chip</string>
+    <string name="available_balance">Available balance</string>
+    <string name="add_new_cards">Add new cards</string>
+    <string name="add_new_card">Add new card</string>
+    <string name="navigate_back">Navigate back</string>
 </resources>

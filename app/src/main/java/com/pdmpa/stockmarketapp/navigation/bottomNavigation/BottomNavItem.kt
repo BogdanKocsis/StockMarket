@@ -1,6 +1,7 @@
 package com.pdmpa.stockmarketapp.navigation.bottomNavigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Equalizer
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Newspaper
 import androidx.compose.material.icons.filled.Person
@@ -27,5 +28,11 @@ sealed class BottomNavItem(
         route = News.route,
         title = "News",
         icon = Icons.Default.Newspaper
+    )
+
+    object StocksListBottomNavItem : BottomNavItem(
+        route = StocksList.route,
+        title = "Market",
+        icon = Icons.Default.Equalizer
     )
 }

@@ -20,12 +20,12 @@ object SignUp : Destinations {
     override val route = "signup_screen"
 }
 
-object ResetPassword: Destinations{
+object ResetPassword : Destinations {
     override val route = "reset_password_screen"
 }
 
-object Home : Destinations {
-    override val route = "home_screen"
+object StocksList : Destinations {
+    override val route = "stocks_list_screen"
 }
 
 object CompanyInfo : Destinations {
@@ -36,9 +36,17 @@ object Profile : Destinations {
     override val route = "profile_screen"
 }
 
-object News: Destinations{
-    override val route = "news"
+object News : Destinations {
+    override val route = "news_screen"
 
 }
 
-
+object Home : Destinations {
+    override val route = "home_screen"
+}
+object AddNewCard : Destinations {
+    override val route = "add_new_card_screen"
+}
+object CardCreated : Destinations {
+    override val route = "card_created_screen"
+}
