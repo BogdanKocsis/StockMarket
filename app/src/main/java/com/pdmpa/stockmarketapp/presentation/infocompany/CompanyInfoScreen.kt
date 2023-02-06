@@ -17,10 +17,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.pdmpa.stockmarketapp.domain.model.IntradayInfo
 import com.pdmpa.stockmarketapp.presentation.CompanyInfoTopAppBar
 import com.pdmpa.stockmarketapp.ui.theme.md_theme_light_background
 import com.pdmpa.stockmarketapp.ui.theme.md_theme_light_onErrorContainer
 import com.ramcosta.composedestinations.annotation.Destination
+import java.time.LocalDateTime
+import java.util.concurrent.ThreadLocalRandom
 
 @Composable
 @Destination
@@ -38,7 +41,10 @@ fun CompanyInfoScreen(
         ) {
             val sendIntent: Intent = Intent().apply {
                 action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, "What about this stock, ${state.company?.name}? \n${state.company?.description}?")
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    "What about this stock, ${state.company?.name}? \n${state.company?.description}?"
+                )
                 type = "text/plain"
             }
             val shareIntent = Intent.createChooser(sendIntent, null)
@@ -49,6 +55,7 @@ fun CompanyInfoScreen(
                 title = state.company?.name,
                 onCLick = { context.startActivity(shareIntent) }
             )
+
             state.company?.let { company ->
                 Text(
                     text = company.symbol,
@@ -87,6 +94,25 @@ fun CompanyInfoScreen(
                     modifier = Modifier.fillMaxWidth(),
                 )
                 if (state.stockInfos.isNotEmpty()) {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(text = "Market Summary")
+                    Spacer(modifier = Modifier.height(32.dp))
+                    StockChart(
+                        infos = state.stockInfos,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(250.dp)
+                            .align(CenterHorizontally)
+                    )
+                } else {
+                    for (i in 1.. 10){
+                        state.stockInfos += (
+                            IntradayInfo(
+                                LocalDateTime.now(),
+                                ThreadLocalRandom.current().nextDouble(52.3257, 52.4557)
+                            )
+                        )
+                    }
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(text = "Market Summary")
                     Spacer(modifier = Modifier.height(32.dp))

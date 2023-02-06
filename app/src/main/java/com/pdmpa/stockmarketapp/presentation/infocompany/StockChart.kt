@@ -2,6 +2,7 @@ package com.pdmpa.stockmarketapp.presentation.infocompany
 
 import android.annotation.SuppressLint
 import android.graphics.Paint
+import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -65,6 +66,10 @@ fun StockChart(
                     textPaint
                 )
             }
+        }
+        infos.forEach{
+            Log.d("StockClose", "StockChart: ${it.close}")
+
         }
         var lastX = 0f
         val strokePath = Path().apply {
